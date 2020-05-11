@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {signUp} from '../../redux_store/actions/authActions';
 
-export class SignIn extends Component {
+export class SignUp extends Component {
     state={
         email:'',
         password:'',
@@ -16,15 +19,21 @@ export class SignIn extends Component {
     }
     handleSubmit=(e)=>{
         e.preventDefault();
-        if(this.state.password!=this.state.confirmPassword){
+        console.log(this.state.password,"    ",this.state.confirmPassword)
+        if(this.state.password!==this.state.confirmPassword){
             alert('Password and Confirm Password should be the same')
         }
+        // else if(this.state.password.length<6){
+        //     alert('Weak Password, try again with diffrent combination')
+        // }
         else{
-            console.log(this.state);
+            this.props.signUp(this.state)
         }
         
     }
     render() {
+        const {auth,authError}=this.props;
+        if(auth.uid) return <Redirect to="/"/>
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
@@ -49,10 +58,13 @@ export class SignIn extends Component {
                     </div>
                     <div className="input-field">
                         <label htmlFor="password">Confirm Password</label>
-                        <input type='password' id='password' onChange={this.handleChange}/>
+                        <input type='password' id='confirmPassword' onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten z-depht-0">Sign Up</button>
+                        <div className="red-text center">
+                            {authError ? <p>{authError}</p>:null}
+                        </div>
                     </div>
                 </form>
             </div>
@@ -60,4 +72,18 @@ export class SignIn extends Component {
     }
 }
 
-export default SignIn
+const mapStateToProps=(state)=>{
+    return {
+        auth:state.firebase.auth,
+        authError:state.auth.authError
+
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        signUp:(newUser)=>dispatch(signUp(newUser))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps )(SignUp)
