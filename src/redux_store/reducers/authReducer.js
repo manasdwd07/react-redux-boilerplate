@@ -34,7 +34,21 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 authError:action.err.message
             }
-
+        
+        case 'FORGOT_SUCCCESS':
+            console.log('Link has been sent')
+            return{
+                ...state,
+                authError:null
+            }
+        
+        case 'FORGOT_ERROR':
+                console.log('Some error occured while sending link please check again')
+                return {
+                    ...state,
+                    authError:action.err.message
+                }
+        
         default:
             return state
     }

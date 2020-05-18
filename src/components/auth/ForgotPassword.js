@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { signIn } from '../../redux_store/actions/authActions';
 import {Redirect} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {forgotPassword} from '../../redux_store/actions/authActions';;
 
-export class SignIn extends Component {
-    state = {
-        email: '',
-        password: ''
+
+export class ForgotPassword extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            email:''
+        }
     }
 
     handleChange = (e) => {
@@ -15,30 +17,34 @@ export class SignIn extends Component {
             [e.target.id]: e.target.value
         })
     }
-    handleSubmit = (e) => {
+    
+    handleSubmit=(e)=>{
         e.preventDefault();
-        this.props.signIn(this.state);
+        this.props.forgotPassword(this.state);
+        setTimeout(()=>{
+            alert('Link has been sent');
+            this.props.history.push('/signin')
+        },3000);
+        
     }
+
     render() {
         const { authError,auth } = this.props
 
-        if(auth.uid) return <Redirect to="/"/>
-        
+        // if(auth.uid) return <Redirect to="/"/>
+
         return (
+            
             <div className="container">
-                <form  className="white">
+                <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
                         <input type='email' id='email' onChange={this.handleChange} />
                     </div>
+                    
                     <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type='password' id='password' onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <button className="btn pink lighten z-depth-0" onClick={this.handleSubmit}>Login</button>&nbsp;&nbsp;
-                        <Link to="/forgotPassword" className="btn orange lighten z-depth-0">Forgot Password</Link>
+                        <button className="btn orange lighten z-depth-0" onClick={this.handleSubmit}>Send Link to reset</button>
                         <div className="red-text center">
                             {authError ? <p>{authError}</p> : null}
                         </div>
@@ -57,10 +63,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        signIn: (creds) => dispatch(signIn(creds))
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        forgotPassword:(user)=>dispatch(forgotPassword(user))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps,mapDispatchToProps)(ForgotPassword)
