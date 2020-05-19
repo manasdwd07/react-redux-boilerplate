@@ -38,7 +38,7 @@ export class SignIn extends Component {
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten z-depth-0" onClick={this.handleSubmit}>Login</button>&nbsp;&nbsp;
-                        <Link to="/forgotPassword" className="btn orange lighten z-depth-0">Forgot Password</Link>
+                        <Link to="/forgotPassword" authError="" className="btn orange lighten z-depth-0">Forgot Password</Link>
                         <div className="red-text center">
                             {authError ? <p>{authError}</p> : null}
                         </div>

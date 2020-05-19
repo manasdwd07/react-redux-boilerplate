@@ -9,7 +9,7 @@ const authReducer = (state = initialState, action) => {
             console.log('Login Error')
             return {
                 ...state,
-                authError: 'Login Failed'
+                authError: action.err.message
             }
         case 'LOGIN_SUCCESS':
             console.log('Login success');
@@ -46,7 +46,7 @@ const authReducer = (state = initialState, action) => {
                 console.log('Some error occured while sending link please check again')
                 return {
                     ...state,
-                    authError:action.err.message
+                    error:action.err.message
                 }
         
         default:
