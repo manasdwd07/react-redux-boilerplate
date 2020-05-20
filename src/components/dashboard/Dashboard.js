@@ -5,7 +5,7 @@ import {firestoreConnect, ReduxFirestoreContext} from 'react-redux-firebase';
 import ProjectList from '../projects/ProjectList';
 import Notifications from './Notifications';
 import {Redirect} from 'react-router-dom';
-import Gallery from './Gallery';
+
 
 
 
@@ -22,7 +22,7 @@ class Dashboard extends Component{
                     <div className="col s12 m4">
                         <ProjectList projects={projects}/>    
                     </div>  
-                    <div className="col s12 m4 offset-m1"><Gallery images={images}/></div>
+                    {/* <div className="col s12 m4 offset-m1"><Gallery images={images}/></div> */}
                     <div className="col s12 m4 offset-m1"><Notifications notifications={notifications}/></div>
                     
                 </div>
@@ -31,7 +31,7 @@ class Dashboard extends Component{
     }
 }
 const mapStateToProps=(state)=>{
-    console.log(state)
+    console.log('state',state)
     return{
         projects:state.firestore.ordered.projects,
         auth:state.firebase.auth,

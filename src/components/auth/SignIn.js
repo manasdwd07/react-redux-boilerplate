@@ -37,7 +37,7 @@ export class SignIn extends Component {
                         <input type='password' id='password' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten z-depth-0" onClick={this.handleSubmit}>Login</button>&nbsp;&nbsp;
+                        <button className="btn-floating btn-large pink lighten z-depth-0 pulse" onClick={this.handleSubmit}>Login</button>&nbsp;&nbsp;
                         <Link to="/forgotPassword" authError="" className="btn orange lighten z-depth-0">Forgot Password</Link>
                         <div className="red-text center">
                             {authError ? <p>{authError}</p> : null}

@@ -7,6 +7,8 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
 import ForgotPassword from './components/auth/ForgotPassword';
+import Gallery from './components/dashboard/Gallery';
+
 
 
 class App extends Component {
@@ -24,6 +26,8 @@ class App extends Component {
             <Route path="/signup" component={SignUp}/>
             <Route path="/create" component={CreateProject}/>
             <Route path="/forgotPassword" component={ForgotPassword}/>
+            <Route path='/gallery' component={Gallery}/>
+            
           </Switch>
         </div>
       </BrowserRouter>
