@@ -6,7 +6,7 @@ class Gallery extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: {}
+            images: []
         }
 
     }
@@ -17,46 +17,43 @@ class Gallery extends Component {
         const storageRef = storage.ref();
         // Create a reference under which you want to list
         var listRef = storageRef.child('images/');
-        const data = []
+        const data = [];
+        const images1=[];
         // Find all the prefixes and items.
         listRef.listAll().then((res) => {
-            res.prefixes.forEach(function (folderRef) {
-                // All the prefixes under listRef.
-                // You may call listAll() recursively on them.
-                folderRef.getDownloadURL().then((url=>{
-                    console.log('folderRef',folderRef,url)
-                }))
-            });
             res.items.forEach((itemRef) => {
                 // All the items under listRef.
                 
                 // images.push(itemRef)
                 itemRef.getDownloadURL().then((url) => {
-                    console.log(url)
                     data.push(url.toString())
-                   
-                }, console.log('urls', data))
+                    
+                })
+
+                console.log(data)
+
+                data.map(el=>{
+                    images1.push(el)
+                })
+
+                console.log(images1)
                 
             });
+            
         }).catch(function (error) {
             // Uh-oh, an error occurred!
             alert('OOps, error occured :' ,error)
-        });
-        // this.setState({images:data})
-
-
-        // console.log(data)
-        // const datas=[data.data()]
+        });  
         return (
             <div className="container">
 
                 <div className="container m-4">
                     <div className="container">
                         <ul>
-                            {console.log('render', data, typeof (data))}
-                            {data.length>0 ? data.map(url => {
+                            
+                            {data ? data.map(url => {
                                 return (<li>
-                                    <img src={url} alt="firebaseStorageImage" />
+                                    <img src={url} alt="firebaseStorageImage" height='100' width='100'/>
                                 </li>)
                                 
                             })

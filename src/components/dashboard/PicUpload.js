@@ -27,25 +27,26 @@ const PicUpload = () => {
             },
             error => {
                 console.log(error);
-            },
-            () => {
-                storage
-                    .ref("images")
-                    .child(image.name)
-                    .getDownloadURL()
-                    .then(url => {
-                        setUrl(url);
-                        
-                    });
             }
+            // },
+            // () => {
+            //     storage
+            //         .ref("images")
+            //         .child(image.name)
+            //         .getDownloadURL()
+            //         .then(url => {
+            //             setUrl(url);
+                        
+            //         });
+            // }
         );
     };
 
     console.log("image: ", image);
 
     return (
-        <div className="container">
-            <progress value={progress} max="100" />
+        <div className="container section">
+            <progress className="right" value={progress} max="100" />
             <br />
             <br />
             <input type="file" onChange={handleChange} />

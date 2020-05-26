@@ -10,6 +10,7 @@ const ProjectSummary = ({project}) => {
                 <span className="card-title">{project.title}</span>
                 <span>{project.image ? <img src={project.image} width='60%' className="fluid" alt="iphonex"/>:null}</span>
                 <p>{project.content}</p>
+                <p>Price of the gadget: {project.price}</p>
                 <p>Posted By {project.authorFirstName} {project.authorLastName}</p>
     <p className="grey-text">{moment(project.createdAt.toDate().toString()).calendar()}</p>
             </div>

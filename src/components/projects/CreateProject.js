@@ -10,7 +10,8 @@ export class CreateProject extends Component {
         super(props);
         this.state = {
             title: '',
-            content: ''
+            content: '',
+            price:''
         }
     }
 
@@ -33,14 +34,18 @@ export class CreateProject extends Component {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Create new Project</h5>
+                    <h5 className="grey-text text-darken-3">Add Gadget Review</h5>
                     <div className="input-field">
-                        <label htmlFor="title">Title</label>
+                        <label htmlFor="title">Name of Gadget</label>
                         <input type='text' id='title' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="content">Project Content</label>
+                        <label htmlFor="content">Your Review Content</label>
                         <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="price">Price in INR</label>
+                        <input type='text' id='price' onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
                         <button className="btn-floating pulse btn-large pink lighten z-depht-0">Create</button>
