@@ -30,6 +30,7 @@ class Dashboard extends Component{
         )
     }
 }
+
 const mapStateToProps=(state)=>{
     console.log('state',state)
     return{
@@ -38,6 +39,7 @@ const mapStateToProps=(state)=>{
         notifications:state.firestore.ordered.notifications
     }
 }
+
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([

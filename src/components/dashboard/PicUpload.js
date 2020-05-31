@@ -46,7 +46,7 @@ const PicUpload = () => {
 
     return (
         <div className="container section">
-            <progress className="right" value={progress} max="100" />
+            <progress className="center-align" value={progress} max="100" />
             <br />
             <br />
             <input type="file" onChange={handleChange} />

@@ -6,10 +6,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(./assets/images/mario-bg.png) no-repeat;
+  background: url(./assets/images/mybg.jpg) no-repeat;
   background-size: 100%;
   background-position: bottom;
-  background-color: #95e8f3;
+  background-color:grey;
+  background-repeat: repeat-y;
   min-height: 100%;
 }
 
