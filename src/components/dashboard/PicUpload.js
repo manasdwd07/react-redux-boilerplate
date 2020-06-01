@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { render } from "react-dom";
 import { storage } from '../../config/firebaseConfig';
 
-const PicUpload = () => {
+const PicUpload = (props) => {
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
@@ -14,7 +14,7 @@ const PicUpload = () => {
         }
     };
 
-    const handleUpload = () => {
+    const handleUpload =async () => {
         // const images=[]
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on(
@@ -28,21 +28,20 @@ const PicUpload = () => {
             error => {
                 console.log(error);
             }
-            // },
-            // () => {
-            //     storage
-            //         .ref("images")
-            //         .child(image.name)
-            //         .getDownloadURL()
-            //         .then(url => {
-            //             setUrl(url);
-                        
-            //         });
-            // }
+            ,
+            () => {
+                
+                props.renderParent();
+                console.log('renderParent ke neeche')
+            }
         );
+
+        await props.renderParent();
+        
+        
     };
 
-    console.log("image: ", image);
+    
 
     return (
         <div className="container section">
@@ -50,7 +49,7 @@ const PicUpload = () => {
             <br />
             <br />
             <input type="file" onChange={handleChange} />
-            <button onClick={handleUpload}>Upload</button>
+            <button onClick={()=>handleUpload()}>Upload</button>
             <br />
             <br />
             
